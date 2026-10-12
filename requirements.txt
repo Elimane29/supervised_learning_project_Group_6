@@ -1,0 +1,21 @@
+# Data and visualization
+numpy
+pandas
+matplotlib
+seaborn
+
+# Supervised learning and imbalanced data
+scikit-learn
+imbalanced-learn
+
+# Tuning, tracking, explanations, and fairness
+optuna
+mlflow
+shap
+fairlearn
+
+# Prediction API and model persistence
+fastapi
+pydantic
+uvicorn
+joblib
