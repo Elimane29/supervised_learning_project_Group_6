@@ -6,6 +6,9 @@ seaborn
 
 # Supervised learning and imbalanced data
 scikit-learn
+lightgbm
+xgboost
+catboost
 imbalanced-learn
 
 # Tuning, tracking, explanations, and fairness

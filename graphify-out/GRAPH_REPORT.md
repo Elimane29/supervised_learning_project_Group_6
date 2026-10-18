@@ -1,12 +1,12 @@
 # Graph Report - Supervised Learning Project - Group Muhammad-Jules-Elimane  (2026-10-12)
 
 ## Corpus Check
-- Corpus is ~36 words - fits in a single context window. You may not need a graph.
+- Corpus is ~1,025 words across the requirements, project brief, and notebook - fits in a single context window. You may not need a graph.
 
 ## Summary
 - 36 nodes · 48 edges · 6 communities
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
-- Token cost: 0 input · 0 output
+- Token cost: unmetered (host extraction usage unavailable; recorded counters are 0 input · 0 output)
 
 ## Community Hubs (Navigation)
 - Supervised Learning Requirements
