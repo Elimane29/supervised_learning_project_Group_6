@@ -1,0 +1,3 @@
+step,rows,patients
+raw encounters,101766,71518
+after removing expired/hospice + invalid gender,99340,69987

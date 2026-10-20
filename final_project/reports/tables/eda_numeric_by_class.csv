@@ -1,0 +1,10 @@
+,mean_class0,mean_class1
+time_in_hospital,4.332,4.765
+num_lab_procedures,42.682,44.288
+num_medications,15.858,16.775
+number_diagnoses,7.360,7.673
+number_inpatient,0.555,1.228
+number_emergency,0.178,0.362
+total_prior_visits,1.091,2.031
+n_prior_encounters,0.549,1.243
+n_meds_changed,0.281,0.336

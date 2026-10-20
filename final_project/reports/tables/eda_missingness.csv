@@ -1,0 +1,10 @@
+,pct_question_mark,pct_None
+weight,0.969,0.000
+medical_specialty,0.489,0.000
+payer_code,0.396,0.000
+race,0.022,0.000
+diag_3,0.014,0.000
+diag_2,0.004,0.000
+diag_1,0.000,0.000
+max_glu_serum,0.000,0.948
+A1Cresult,0.000,0.830

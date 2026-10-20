@@ -1,0 +1,16 @@
+{
+  "model": "random_forest",
+  "params": {
+    "n_estimators": 200,
+    "max_depth": 25,
+    "min_samples_leaf": 29,
+    "max_features": 0.19372654749718332,
+    "max_samples": 0.36670827946844653,
+    "class_weight": null
+  },
+  "cv_ap_mean": 0.22657982863553477,
+  "cv_ap_std": 0.01369583935232225,
+  "cv_auc_mean": 0.6804541913060109,
+  "n_trials": 15,
+  "n_pruned": 0
+}

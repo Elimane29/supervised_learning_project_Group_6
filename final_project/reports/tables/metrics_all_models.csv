@@ -1,0 +1,7 @@
+phase,model,roc_auc,average_precision,brier,accuracy @ t=0.5,precision @ t=0.5,recall @ t=0.5,f1 @ t=0.5,alert_rate @ t=0.5,accuracy @ t=0.175,precision @ t=0.175,recall @ t=0.175,f1 @ t=0.175,alert_rate @ t=0.175
+"CV-validation (development, out-of-fold)",dummy (prevalence),0.5000,0.1139,0.1009,0.8861,0.0000,0.0000,0.0000,0.0000,0.8861,0.0000,0.0000,0.0000,0.0000
+"CV-validation (development, out-of-fold)",logreg,0.6701,0.2183,0.0967,0.8860,0.4861,0.0173,0.0335,0.0041,0.8278,0.2545,0.2654,0.2598,0.1188
+"CV-validation (development, out-of-fold)",random_forest,0.6803,0.2248,0.0961,0.8861,0.3333,0.0001,0.0002,0.0000,0.8157,0.2477,0.3034,0.2727,0.1395
+"CV-validation (development, out-of-fold)",lightgbm,0.6859,0.2378,0.0966,0.8864,0.5306,0.0211,0.0406,0.0045,0.7207,0.2055,0.5066,0.2923,0.2808
+"CV-validation (development, out-of-fold)",catboost,0.6880,0.2466,0.0949,0.8872,0.5960,0.0295,0.0562,0.0056,0.8144,0.2581,0.3357,0.2918,0.1481
+"Test (held out, once)",final catboost,0.6826,0.2387,0.0954,0.8868,0.5745,0.0239,0.0458,0.0047,0.8087,0.2487,0.3363,0.2859,0.1540
