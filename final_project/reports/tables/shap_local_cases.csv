@@ -1,0 +1,5 @@
+case,p_calibrated,y,top_contributions
+true_positive_high_risk,0.7929,1,discharge_disposition_id=+1.45; diag_1_group=+0.96; number_inpatient=+0.37; diag_1=+0.18; total_prior_visits=+0.14
+false_negative_missed,0.0244,1,discharge_disposition_id=-0.22; diag_2=-0.18; number_inpatient=-0.16; glipizide=-0.15; num_procedures=-0.12
+false_positive_alert,0.8855,0,discharge_disposition_id=+1.73; diag_1_group=+0.97; payer_code=+0.27; medical_specialty=+0.20; admission_source_id=+0.17
+true_negative_low_risk,0.0079,0,diag_1_group=-0.71; medical_specialty=-0.31; discharge_disposition_id=-0.23; num_procedures=-0.17; labs_per_day=-0.16

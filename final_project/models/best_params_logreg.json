@@ -1,0 +1,13 @@
+{
+  "model": "logreg",
+  "params": {
+    "C": 0.21274387297312347,
+    "penalty": "l1",
+    "class_weight": null
+  },
+  "cv_ap_mean": 0.219127227208884,
+  "cv_ap_std": 0.011575938024568262,
+  "cv_auc_mean": 0.6701527109188402,
+  "n_trials": 25,
+  "n_pruned": 0
+}

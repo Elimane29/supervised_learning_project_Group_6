@@ -1,0 +1,6 @@
+check,variant,cv_ap,cv_ap_sd,cv_auc
+temporal,past stays only (ours),0.2380,0.0121,0.6854
+temporal,past + future stays (leaky),0.3150,0.0096,0.7889
+temporal,future stays only (leaky),0.3374,0.0079,0.8002
+group,grouped by patient (ours),0.2380,0.0121,0.6854
+group,patients mixed across folds (leaky),0.2395,0.0049,0.6857

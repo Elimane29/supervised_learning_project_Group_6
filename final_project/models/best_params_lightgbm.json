@@ -1,0 +1,20 @@
+{
+  "model": "lightgbm",
+  "params": {
+    "n_estimators": 900,
+    "learning_rate": 0.005991442782211896,
+    "num_leaves": 33,
+    "max_depth": 6,
+    "min_child_samples": 27,
+    "subsample": 0.9123218364167822,
+    "colsample_bytree": 0.37778952131930654,
+    "reg_alpha": 0.17675009411499287,
+    "reg_lambda": 0.01596021011318932,
+    "scale_pos_weight": 1.4053363128172796
+  },
+  "cv_ap_mean": 0.23932425534737445,
+  "cv_ap_std": 0.012489310467162453,
+  "cv_auc_mean": 0.6860473336204617,
+  "n_trials": 32,
+  "n_pruned": 1
+}

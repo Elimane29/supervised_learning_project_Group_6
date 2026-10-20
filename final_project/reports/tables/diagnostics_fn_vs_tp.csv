@@ -1,0 +1,12 @@
+,FN (missed),TP (caught)
+no inpatient visit last year,0.638,0.221
+no earlier stay in records,0.656,0.305
+discharged home (id 1),0.584,0.321
+HbA1c not tested,0.844,0.898
+payer missing,0.384,0.428
+predicted risk < 0.10,0.481,0.000
+mean time_in_hospital,4.487,5.353
+mean num_medications,16.457,19.388
+mean number_diagnoses,7.634,8.033
+mean age,63.096,61.143
+count,1502.000,761.000

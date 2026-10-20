@@ -1,0 +1,51 @@
+# Central configuration: every script reads this file, so a choice is made once.
+seed: 42
+
+data:
+  openml_id: 4541
+  target_column: readmitted
+  positive_label: "<30"          # 1 = readmitted within 30 days; ">30" and "NO" -> 0
+  group_column: patient_nbr      # one patient must never sit on both sides of a split
+  # Discharge dispositions after which a readmission is impossible or not the use case:
+  # 11 expired, 19/20/21 expired (Medicare variants), 13/14 hospice.
+  excluded_discharge_ids: [11, 13, 14, 19, 20, 21]
+  test_size: 0.2
+
+cv:
+  n_splits: 5
+
+features:
+  # Columns removed before modelling, with the reason documented in the report.
+  # race is the sensitive attribute: kept in the data for the fairness audit, never a model input.
+  drop: [encounter_id, patient_nbr, weight, examide, citoglipton, race]
+  sensitive: race
+  min_category_count: 50         # rarer categories are pooled into "Other" (learned per fold)
+  use_prior_encounters: true     # patient-history feature (see features.py)
+  use_target_encoding: true      # cross-fitted target encoding of raw ICD-9 codes
+
+selection_metric: average_precision   # PR-AUC: the course metric for rare positives
+
+business:
+  # Illustrative costs for the bed-management use case (sensitivity analysis in report):
+  # a missed early readmission (FN) = unplanned bed + emergency re-admission workload,
+  # a false alert (FP) = one follow-up call / provisional bed hold.
+  cost_fn: 5.0
+  cost_fp: 1.0
+  review_capacity: 0.20          # share of discharges the team can follow up on
+
+optuna:
+  n_trials:
+    logreg: 25
+    random_forest: 15
+    lightgbm: 50
+    catboost: 8
+  timeout_per_model_s: 2400
+
+mlflow:
+  tracking_uri: sqlite:///mlflow.db
+  experiment: diabetes_readmission_30d
+
+paths:
+  figures: reports/figures
+  tables: reports/tables
+  models: models
