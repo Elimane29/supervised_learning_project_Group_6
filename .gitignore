@@ -228,8 +228,9 @@ catboost_info/
 mlflow.db
 mlruns/
 mlartifacts/
-# large binaries rebuilt by scripts/04_finalize.py
+# large binaries rebuilt by scripts/04_finalize.py; the final bundle is versioned so the API works after a clone
 models/*.joblib
+!models/final_model.joblib
 models/*.npy
 graphify-out/cache/
 # LaTeX build files

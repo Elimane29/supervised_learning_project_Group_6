@@ -53,12 +53,84 @@ python scripts/09_leakage_checks.py
 python scripts/10_metrics_table.py
 python scripts/07_export_runs.py
 pytest -q
-uvicorn api.app:app --reload          # http://127.0.0.1:8000/docs
 mlflow ui --backend-store-uri sqlite:///mlflow.db
 ```
 
-Example request: `curl -X POST localhost:8000/predict -H "Content-Type: application/json" -d '{"number_inpatient": 3, "diag_1": "428"}'`
-(fields left out take the documented defaults, see `/docs`).
+## Using the prediction API
+
+The API serves the frozen final model (CatBoost + cost-based threshold 0.175) as a discharge-time
+risk score. The trained bundle `models/final_model.joblib` is versioned in the repository, so the API
+works right after a clone; no retraining is needed.
+
+### 1. Start it
+
+```bash
+python -m venv .venv && .venv/Scripts/activate        # Windows; source .venv/bin/activate on Linux/macOS
+pip install -r requirements.txt && pip install -e .
+uvicorn api.app:app --reload
+```
+
+**From VS Code:** open the folder, select the `.venv` interpreter (`Ctrl+Shift+P` →
+*Python: Select Interpreter*), then press **F5** and choose **"Run prediction API"**.
+`.vscode/launch.json` starts the server, and VS Code shows the address.
+
+Then open **http://127.0.0.1:8000/docs**: an interactive page where each endpoint can be tried
+from the browser (**Try it out** → edit the patient → **Execute**).
+
+### 2. Endpoints
+
+| Method | Path | What it does |
+|---|---|---|
+| GET | `/health` | Checks the service; returns the model name, calibration and threshold |
+| POST | `/predict` | One discharged encounter → its 30-day readmission risk and a follow-up flag |
+| POST | `/predict_batch` | A list of encounters (e.g. today's discharges) → one answer per patient |
+
+### 3. What to send
+
+Any field left out takes the default shown in `/docs`. The most influential inputs are:
+
+| Field | Meaning | Example |
+|---|---|---|
+| `number_inpatient` | inpatient stays in the previous year | `3` |
+| `n_prior_encounters` | earlier stays of this patient in the records | `4` |
+| `discharge_disposition_id` | where the patient goes: `1` home, `6` home with health service, `3` skilled nursing | `3` |
+| `diag_1`, `diag_2`, `diag_3` | ICD-9 diagnosis codes (primary first) | `"428"` (heart failure) |
+| `age` | age bracket | `"[80-90)"` |
+| `time_in_hospital` | length of stay in days, 1 to 14 (other values are rejected) | `9` |
+| `insulin`, `metformin`, … | dose change during the stay: `No`, `Steady`, `Up`, `Down` | `"Up"` |
+| `A1Cresult` | HbA1c result: `None` (not tested), `Norm`, `>7`, `>8` | `">8"` |
+
+### 4. What comes back
+
+```json
+{"probability_readmission_30d": 0.3249, "flag_for_follow_up": true, "threshold": 0.175}
+```
+
+* `probability_readmission_30d`: calibrated risk of an early return. On the test set the predicted
+  risks added up to 2,258 readmissions for 2,263 observed, so it can be summed to plan beds.
+* `flag_for_follow_up`: `true` when the risk is at least 0.175. This threshold assumes a missed
+  readmission costs five times a follow-up call.
+
+### 5. Example patients
+
+| Patient | Profile | Risk | Flag |
+|---|---|---|---|
+| A | 82, heart failure, 3 admissions last year, 9-day stay, insulin increased, sent to a care facility | 0.32 | yes |
+| B | 55, diabetes, first admission, 3-day stay, sent home | 0.06 | no |
+| C | 65, COPD + heart failure, 1 admission last year, home with health service | 0.19 | yes |
+
+Patient A from a terminal (PowerShell):
+
+```powershell
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/predict -ContentType "application/json" -Body '{"age":"[80-90)","diag_1":"428","diag_2":"250.02","diag_3":"403","number_inpatient":3,"number_emergency":2,"n_prior_encounters":4,"time_in_hospital":9,"num_medications":22,"number_diagnoses":9,"discharge_disposition_id":3,"insulin":"Up","change":"Ch","A1Cresult":">8"}'
+```
+
+or with curl: `curl -X POST localhost:8000/predict -H "Content-Type: application/json" -d '{"number_inpatient": 3, "diag_1": "428"}'`.
+
+The model inherits the limits described in the report: it is a prioritisation aid, not a diagnosis,
+and it under-detects first-time patients sent home (recall 15% for patients with no prior admission).
+If you change the code or the libraries, rebuild the bundle with `python scripts/04_finalize.py`
+(about 25 minutes, using the saved `models/best_params_*.json`).
 
 ## Results
 
