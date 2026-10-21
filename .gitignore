@@ -219,6 +219,26 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+# --- project-specific ---------------------------------------------------------
+# OpenML cache (re-downloaded by readmission.data.load_raw), logs, library caches
+data/
+logs/
+catboost_info/
+# local MLflow store; run summaries are exported to reports/tables/mlflow_runs.csv
+mlflow.db
+mlruns/
+mlartifacts/
+# large binaries rebuilt by scripts/04_finalize.py
+models/*.joblib
+models/*.npy
+graphify-out/cache/
+# LaTeX build files
+report/*.aux
+report/*.log
+report/*.out
+report/*.toc
+report/*.synctex.gz
+
 # tooling outputs
 graphify-out/
 catboost_info/
