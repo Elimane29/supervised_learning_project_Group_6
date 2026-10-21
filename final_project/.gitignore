@@ -238,3 +238,9 @@ report/*.log
 report/*.out
 report/*.toc
 report/*.synctex.gz
+
+# tooling outputs
+graphify-out/
+catboost_info/
+mlflow.db
+mlruns/

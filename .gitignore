@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# tooling outputs
+graphify-out/
+catboost_info/
+mlflow.db
+mlruns/
