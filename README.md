@@ -169,4 +169,6 @@ Every figure and table is in `reports/`, and every run is in MLflow (`reports/ta
 * **`race` is the audited sensitive attribute** and is never a model input.
 
 ## Use of AI assistants
-Claude (Anthropic) was used as a coding assistant to structure the package, write the scripts and draft the slides. The report states where it was used.
+Claude (Anthropic) was used as a coding and drafting assistant to help structure the Python package and scripts, support implementation of the experiment pipeline, and draft parts of the slides and report. ChatGPT (OpenAI) was also used to support debugging, conceptual review, interpretation of modelling choices and metrics, and preparation of the presentation.
+
+The exploratory data analysis was carried out by the group, and the course material was studied independently in order to challenge AI-generated coding choices, verify that the modelling decisions were consistent with the concepts taught in class, and check the coherence of the project as a whole. All modelling decisions, validation choices, results and interpretations were reviewed by the group, and every member can explain and defend the final methodology and conclusions.
